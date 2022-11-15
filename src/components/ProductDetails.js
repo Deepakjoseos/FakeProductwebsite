@@ -4,15 +4,20 @@ import { getEachProduct } from '../redux/productSlice';
 import { useParams } from "react-router";
 
 
-const ProductDetails = (id) => {
-  const { products, loading} = useSelector((state) => state.product)
-  const dispatch = useDispatch();
+const ProductDetails = () => {
   const { id } = useParams();
-  useEffect(() => {
-    dispatch(getEachProduct());
-    (setFilter(products));
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  },[id]);
+  useEffect(() => {
+    const getProduct = async () => {
+      setLoading(true);
+      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+      setProduct(await response.json());
+      setLoading(false);
+    };
+    getProduct();
+  }, []);
   const Showproduct = () => {
     return (
       <>
@@ -29,7 +34,7 @@ const ProductDetails = (id) => {
           <h1 className="display-5">{product.title}</h1>
           <p className="lead fw-bolder">
             Rating {product.rating && product.rating.rate}
-            <i className="fa fa-star"></i>(
+            <i style={{color:"yellow"}} className="fa fa-star"></i>(
             {product.rating && product.rating.count})
           </p>
           <h3 className="display-6 fw-bold my-4">$ {product.price}</h3>

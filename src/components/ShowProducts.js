@@ -77,12 +77,12 @@ export default function ShowProducts() {
                       <i style={{color:"yellow"}} className="fa fa-star"></i>(
                       {product.rating && product.rating.count})
                     </p>
-                    <button
-                      
+                    <NavLink
+                      to={`/products/${product.id}`}
                       className="btn btn-outline-dark"
                     >
                       Buy Now
-                    </button>
+                    </NavLink>
                   </div>
                 </div>
               </div>

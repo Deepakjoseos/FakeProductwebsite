@@ -7,10 +7,7 @@ export const getProducts = createAsyncThunk("/products", async () => {
     const resp = await axios(`https://fakestoreapi.com/products`);
     return resp.data;
 } );
-export const getEachProduct = createAsyncThunk("/product", async () => {
-    const resp = await axios(`https://fakestoreapi.com/products/${id}`);
-    return resp.data;
-} );
+
 
 const productSlice = createSlice(({
     name:"products",
